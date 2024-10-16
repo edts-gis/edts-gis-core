@@ -14,12 +14,15 @@ steps:
     - --region=${_REGION}
     - --platform=managed
     - --timeout=3600
-    - --set-env-vars=DB_DRIVER=${_DB_DRIVER}
-    - --set-env-vars=DB_HOSTNAME=${_DB_HOSTNAME}
-    - --set-env-vars=DB_USERNAME=${_DB_USERNAME}
-    - --set-env-vars=DB_PORT=${_DB_PORT}
-    - --set-env-vars=DB_NAME=${_DB_NAME}
-    - --set-env-vars=UNIX_SOCKET_PATH=${_UNIX_SOCKET_PATH}
+    - --add-cloudsql-instances=${_CLOUD_SQL_INSTANCE}
+    - --set-env-vars INSTANCE_CONNECTION_NAME=${_CLOUD_SQL_INSTANCE_CONNECTION_NAME}
+    - --set-env-vars INSTANCE_UNIX_SOCKET=${_CLOUD_SQL_INSTANCE_UNIX_SOCKET}
+    - --set-env-vars DB_DRIVER=${_DB_DRIVER}
+    - --set-env-vars DB_HOSTNAME=${_DB_HOSTNAME}
+    - --set-env-vars DB_USERNAME=${_DB_USERNAME}
+    - --set-env-vars DB_PORT=${_DB_PORT}
+    - --set-env-vars DB_NAME=${_DB_NAME}
+    - --set-env-vars UNIX_SOCKET_PATH=${_CLOUD_SQL_UNIX_SOCKET_PATH}
     - --update-secrets=DB_PASSWORD=${_DB_PASSWORD}
     - --allow-unauthenticated
 
@@ -30,9 +33,10 @@ substitutions:
   _REPOSITORY: edts-gis-images
   _IMAGE: edts-gis-core
   _PROJECT_CODE: '617510130799'
-  _DB_INSTANCE: edts-gis-db-${_ENVIRONMENT}
+  _CLOUD_SQL_INSTANCE: edts-gis-db-${_ENVIRONMENT}
+  _CLOUD_SQL_INSTANCE_CONNECTION_NAME: ${_PROJECT_ID}:${_REGION}:${_CLOUD_SQL_INSTANCE}
+  _CLOUD_SQL_INSTANCE_UNIX_SOCKET: /cloudsql/${_CLOUD_SQL_INSTANCE_CONN}
   _DB_PASSWORD: projects/${_PROJECT_CODE}/secrets/edts-gis-db-${_ENVIRONMENT}-password/versions/latest
-  _UNIX_SOCKET_PATH: /cloudsql/${_PROJECT_ID}:${_REGION}:${_DB_INSTANCE}
   _AR_IMAGE: ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${_ENVIRONMENT}
 
 images:
