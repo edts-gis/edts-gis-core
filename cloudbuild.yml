@@ -1,0 +1,20 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', '${_AR_IMAGE}', '.' ]
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', '${_AR_IMAGE}' ]
+
+
+substitutions:
+  _LOCATION: asia-southeast2
+  _PROJECT_ID: edts-playpen-leonardi
+  _REPOSITORY: edts-gis-images
+  _IMAGE: edts-gis-core
+  _AR_IMAGE: '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${_ENVIRONMENT}'
+
+images:
+  - '${_AR_IMAGE}'
+
+options:
+  dynamicSubstitutions: true
