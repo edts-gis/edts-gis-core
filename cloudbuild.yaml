@@ -22,8 +22,8 @@ steps:
     - --set-env-vars=DB_PORT=${_DB_PORT}
     - --set-env-vars=DB_NAME=${_DB_NAME}
     - --update-secrets=DB_PASSWORD=${_DB_PASSWORD}
-    - --memory=2Gi
-    - --cpu=1
+    - --memory=4Gi
+    - --cpu=2
     - --allow-unauthenticated
 
 substitutions:
