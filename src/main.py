@@ -19,3 +19,10 @@ app.add_middleware(
 
 bootstrap_di(C)
 configure_routers(app)
+
+# Index
+@app.get("/")
+def index():
+    return {
+        "message": "OK"
+    }
