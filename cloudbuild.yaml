@@ -5,13 +5,27 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', '${_AR_IMAGE}' ]
 
+- name: gcr.io/cloud-builders/gcloud
+  args:
+    - run
+    - deploy
+    - ${_CR_NAME}
+    - --image=${_AR_IMAGE}
+    - --region=${_REGION}
+    - --platform=managed
+    - --timeout=3600
+    - --update-secrets=DB_PASSWORD=${_DB_PASSWORD}
+    - --allow-unauthenticated
+
 
 substitutions:
-  _LOCATION: asia-southeast2
+  _REGION: asia-southeast2
   _PROJECT_ID: edts-playpen-leonardi
   _REPOSITORY: edts-gis-images
   _IMAGE: edts-gis-core
-  _AR_IMAGE: '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${_ENVIRONMENT}'
+  _PROJECT_CODE: 617510130799
+  _PRIVATE_KEY: projects/${_PROJECT_CODE}/secrets/edts-gis-db-dev-password/versions/latest
+  _AR_IMAGE: '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${_ENVIRONMENT}
 
 images:
   - '${_AR_IMAGE}'
