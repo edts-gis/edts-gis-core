@@ -22,7 +22,6 @@ steps:
     - --set-env-vars DB_USERNAME=${_DB_USERNAME}
     - --set-env-vars DB_PORT=${_DB_PORT}
     - --set-env-vars DB_NAME=${_DB_NAME}
-    - --set-env-vars UNIX_SOCKET_PATH=${_CLOUD_SQL_UNIX_SOCKET_PATH}
     - --update-secrets=DB_PASSWORD=${_DB_PASSWORD}
     - --allow-unauthenticated
 
