@@ -17,7 +17,6 @@ steps:
     - --update-secrets=DB_PASSWORD=${_DB_PASSWORD}
     - --allow-unauthenticated
 
-
 substitutions:
   _REGION: asia-southeast2
   _PROJECT_ID: edts-playpen-leonardi
