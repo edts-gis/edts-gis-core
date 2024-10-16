@@ -18,6 +18,7 @@ steps:
     - --set-env-vars=DB_HOSTNAME=${_DB_HOSTNAME}
     - --set-env-vars=DB_USERNAME=${_DB_USERNAME}
     - --set-env-vars=DB_PORT=${_DB_PORT}
+    - --set-env-vars=DB_NAME=${_DB_NAME}
     - --update-secrets=DB_PASSWORD=${_DB_PASSWORD}
     - --allow-unauthenticated
 
