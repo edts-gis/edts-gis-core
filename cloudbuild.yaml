@@ -18,6 +18,7 @@ steps:
     - --allow-unauthenticated
 
 substitutions:
+  _CR_NAME: edts-gis-core-${_ENVIRONMENT}
   _REGION: asia-southeast2
   _PROJECT_ID: edts-playpen-leonardi
   _REPOSITORY: edts-gis-images
