@@ -1,9 +1,9 @@
 import json
 
-from typing import Protocol, List
+from typing import List, Protocol, Union
 
 from pydantic import field_validator, BaseModel
-from pydantic_geojson import MultiPolygonModel, PointModel
+from pydantic_geojson import MultiPolygonModel, PolygonModel, PointModel
 
 
 # Entity
@@ -29,7 +29,7 @@ class Population(BaseModel):
     province: str
     city: str
     population_total: int
-    geometry: MultiPolygonModel
+    geometry: Union[MultiPolygonModel, PolygonModel]
 
     @field_validator("geometry", mode="before")
     @classmethod

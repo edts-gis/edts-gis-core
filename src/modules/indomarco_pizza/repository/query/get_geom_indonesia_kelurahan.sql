@@ -18,4 +18,5 @@ SELECT
   elevation,
   ST_AsGeoJSON(ST_CollectionExtract("geometry"::geometry, 3)) AS "geometry"
 FROM indomarco_pizza.geom_indonesia_kelurahan
-WHERE TRUE;
+WHERE TRUE
+  AND provinsi = 'JAWA BARAT';

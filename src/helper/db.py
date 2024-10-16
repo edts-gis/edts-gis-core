@@ -3,12 +3,13 @@ from typing import List, Optional
 
 from pydantic import SecretStr
 from sqlalchemy import create_engine, text, Engine
+from sqlalchemy.engine.url import URL
 
 
 
-def get_db(db_uri: SecretStr) -> Engine:
+def get_db(db_uri: URL) -> Engine:
     engine = create_engine(
-        db_uri.get_secret_value(),
+        db_uri,
         pool_pre_ping = True,
     )
     return engine

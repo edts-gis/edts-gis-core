@@ -19,6 +19,7 @@ steps:
     - --set-env-vars=DB_USERNAME=${_DB_USERNAME}
     - --set-env-vars=DB_PORT=${_DB_PORT}
     - --set-env-vars=DB_NAME=${_DB_NAME}
+    - --set-env-vars=UNIX_SOCKET_PATH=${_UNIX_SOCKET_PATH}
     - --update-secrets=DB_PASSWORD=${_DB_PASSWORD}
     - --allow-unauthenticated
 
@@ -29,7 +30,9 @@ substitutions:
   _REPOSITORY: edts-gis-images
   _IMAGE: edts-gis-core
   _PROJECT_CODE: '617510130799'
+  _DB_INSTANCE: edts-gis-db-${_ENVIRONMENT}
   _DB_PASSWORD: projects/${_PROJECT_CODE}/secrets/edts-gis-db-${_ENVIRONMENT}-password/versions/latest
+  _UNIX_SOCKET_PATH: /cloudsql/${_PROJECT_ID}:${_REGION}:${_DB_INSTANCE}
   _AR_IMAGE: ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${_ENVIRONMENT}
 
 images:

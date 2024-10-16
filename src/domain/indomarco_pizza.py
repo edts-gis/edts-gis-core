@@ -13,7 +13,7 @@ class GeomKabkotaPizza(BaseModel):
     pt_id: int
     seg_id: int
     ring_id: int
-    geometry: MultiPolygonModel
+    geometry: Union[MultiPolygonModel, PolygonModel]
 
     @field_validator("geometry", mode="before")
     @classmethod
