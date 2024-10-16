@@ -22,7 +22,7 @@ substitutions:
   _PROJECT_ID: edts-playpen-leonardi
   _REPOSITORY: edts-gis-images
   _IMAGE: edts-gis-core
-  _PROJECT_CODE: 617510130799
+  _PROJECT_CODE: '617510130799'
   _PRIVATE_KEY: projects/${_PROJECT_CODE}/secrets/edts-gis-db-dev-password/versions/latest
   _AR_IMAGE: ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${_ENVIRONMENT}
 
