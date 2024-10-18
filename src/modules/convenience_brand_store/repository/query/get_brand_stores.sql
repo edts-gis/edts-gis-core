@@ -7,4 +7,7 @@ SELECT
   subdistrict,
   ST_AsGeoJSON("geometry") AS "geometry"
 FROM convenience_brand_store.brand_stores
-WHERE TRUE;
+WHERE TRUE
+ORDER BY ogc_fid
+OFFSET :offset
+LIMIT :limit;

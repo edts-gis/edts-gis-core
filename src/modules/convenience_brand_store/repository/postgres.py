@@ -18,25 +18,55 @@ class ConvenienceBrandStoreRepositoryImpl:
 
 
     # Public
-    def get_brand_stores(self) -> List[BrandStore]:
+    def count_brand_stores(self) -> List[BrandStore]:
+        cnt_brand_stores = int(
+            self.__db.execute_query(
+                self.__query_dir,
+                "count_brand_stores.sql",
+                params = {}
+            )[0]["cnt"]
+        )
+        return cnt_brand_stores
+
+
+    def get_brand_stores(self, page: int, limit: int) -> List[BrandStore]:
+        offset = (page - 1) * limit
         brand_stores = list(map(
             BrandStore.model_validate,
             self.__db.execute_query(
                 self.__query_dir,
                 "get_brand_stores.sql",
-                params = {}
+                params = {
+                    "offset": offset,
+                    "limit": limit
+                }
             )
         ))
         return brand_stores
 
 
-    def get_populations(self) -> List[Population]:
+    def count_populations(self) -> List[BrandStore]:
+        cnt_populations = int(
+            self.__db.execute_query(
+                self.__query_dir,
+                "count_populations.sql",
+                params = {}
+            )[0]["cnt"]
+        )
+        return cnt_populations
+
+
+    def get_populations(self, page: int, limit: int) -> List[Population]:
+        offset = (page - 1) * limit
         populations = list(map(
             Population.model_validate,
             self.__db.execute_query(
                 self.__query_dir,
                 "get_populations.sql",
-                params = {}
+                params = {
+                    "offset": offset,
+                    "limit": limit
+                }
             )
         ))
         return populations

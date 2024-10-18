@@ -20,4 +20,4 @@ SELECT
 FROM indomarco_pizza.geom_indonesia_kelurahan
 WHERE TRUE
   AND provinsi = 'JAWA BARAT'
-LIMIT 200;
+-- LIMIT 200;
