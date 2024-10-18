@@ -1,10 +1,9 @@
 import json
 
-from typing import List, Optional, Union, Protocol
+from typing import List, Protocol, Optional, Tuple, Union
 
 from pydantic import field_validator, BaseModel
 from pydantic_geojson import MultiPolygonModel, PolygonModel
-
 
 
 # Entity
@@ -51,17 +50,23 @@ class GeomIndonesiaKelurahan(BaseModel):
 
 # Repository
 class IndomarcoPizzaDBRepository(Protocol):
-    def get_geom_kabkota_pizza(self) -> List[GeomKabkotaPizza]:
+    def count_geom_kabkota_pizza(self) -> int:
         pass
 
-    def get_geom_indonesia_kelurahan(self) -> List[GeomIndonesiaKelurahan]:
+    def get_geom_kabkota_pizza(self, page: int, limit: int) -> List[GeomKabkotaPizza]:
+        pass
+
+    def count_geom_indonesia_kelurahan(self) -> int:
+        pass
+
+    def get_geom_indonesia_kelurahan(self, page: int, limit: int) -> List[GeomIndonesiaKelurahan]:
         pass
 
 
 # Usecase
 class IndomarcoPizzaUsecase(Protocol):
-    def get_geom_kabkota_pizza(self) -> List[GeomKabkotaPizza]:
+    def get_geom_kabkota_pizza(self, page: int, limit: int) -> Tuple[int, List[GeomKabkotaPizza]]:
         pass
 
-    def get_geom_indonesia_kelurahan(self) -> List[GeomIndonesiaKelurahan]:
+    def get_geom_indonesia_kelurahan(self, page: int, limit: int) -> Tuple[int, List[GeomIndonesiaKelurahan]]:
         pass

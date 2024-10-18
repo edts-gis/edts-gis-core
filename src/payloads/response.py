@@ -35,7 +35,10 @@ class GeoJSONResponse(BaseModel):
         name: str,
         crs: str,
         data: List[BaseModel]
-    ) -> "GeoJSONResponse":
+    ) -> Optional["GeoJSONResponse"]:
+        if len(data) == 0:
+            return
+
         features = []
         for d in data:
             _d = d.model_dump()
@@ -98,7 +101,7 @@ class PaginateGeoJSONResponse(BaseModel):
     total_page: int
     total_data: int
     url: PaginationURL
-    data: GeoJSONResponse
+    data: Optional[GeoJSONResponse]
 
     @classmethod
     def from_result(

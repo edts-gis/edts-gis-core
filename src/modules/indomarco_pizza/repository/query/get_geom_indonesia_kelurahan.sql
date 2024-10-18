@@ -19,5 +19,11 @@ SELECT
   ST_AsGeoJSON(ST_CollectionExtract("geometry"::geometry, 3)) AS "geometry"
 FROM indomarco_pizza.geom_indonesia_kelurahan
 WHERE TRUE
-  AND provinsi = 'JAWA BARAT'
--- LIMIT 200;
+  AND provinsi IN (
+    'JAWA BARAT',
+    'BANTEN',
+    'DKI JAKARTA'
+  )
+ORDER BY ogc_fid
+OFFSET :offset
+LIMIT :limit;

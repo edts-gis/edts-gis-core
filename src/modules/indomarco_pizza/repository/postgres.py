@@ -18,25 +18,55 @@ class IndomarcoPizzaPostgresRepositoryImpl:
 
 
     # Public
-    def get_geom_kabkota_pizza(self) -> List[GeomKabkotaPizza]:
-        geom_kabkota_pizza_list = list(map(
+    def count_geom_kabkota_pizza(self) -> int:
+        cnt_geom_kabkota_pizza = int(
+            self.__db.execute_query(
+                self.__query_dir,
+                "count_geom_kabkota_pizza.sql",
+                params = {}
+            )[0]["cnt"]
+        )
+        return cnt_geom_kabkota_pizza
+
+
+    def get_geom_kabkota_pizza(self, page: int, limit: int) -> List[GeomKabkotaPizza]:
+        offset = max(0, (page - 1)) * limit
+        geom_kabkota_pizza = list(map(
             GeomKabkotaPizza.model_validate,
             self.__db.execute_query(
                 self.__query_dir,
                 "get_geom_kabkota_pizza.sql",
-                params = {}
+                params = {
+                    "offset": offset,
+                    "limit": limit
+                }
             )
         ))
-        return geom_kabkota_pizza_list
+        return geom_kabkota_pizza
 
 
-    def get_geom_indonesia_kelurahan(self) -> List[GeomKabkotaPizza]:
-        geom_indonesia_kelurahan_list = list(map(
+    def count_geom_indonesia_kelurahan(self) -> int:
+        cnt_geom_indonesia_kelurahan = int(
+            self.__db.execute_query(
+                self.__query_dir,
+                "count_geom_indonesia_kelurahan.sql",
+                params = {}
+            )[0]["cnt"]
+        )
+        return cnt_geom_indonesia_kelurahan
+
+
+    def get_geom_indonesia_kelurahan(self, page: int, limit: int) -> List[GeomKabkotaPizza]:
+        offset = max(0, (page - 1)) * limit
+        geom_indonesia_kelurahan = list(map(
             GeomIndonesiaKelurahan.model_validate,
             self.__db.execute_query(
                 self.__query_dir,
                 "get_geom_indonesia_kelurahan.sql",
-                params = {}
+                params = {
+                    "offset": offset,
+                    "limit": limit
+                }
             )
         ))
-        return geom_indonesia_kelurahan_list
+        return geom_indonesia_kelurahan

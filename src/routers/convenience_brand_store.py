@@ -1,5 +1,3 @@
-from typing import Optional
-
 from fastapi import APIRouter, Request
 from kink import di
 
@@ -11,8 +9,6 @@ from src.payloads.response import (
 from src.domain.convenience_brand_store import ConvenienceBrandStoreUsecase
 
 
-API_GROUP = "convenience_brand_store"
-
 api_router = APIRouter(
     prefix = "/convenience-brand-store",
     tags = ["convenience_brand_store"]
@@ -20,7 +16,7 @@ api_router = APIRouter(
 
 # Router
 @api_router.get("/brand-stores", response_model=PaginateGeoJSONResponse)
-def get_brand_store(r: Request, page: int = 1, limit: int = 500):
+def get_brand_store(r: Request, page: int = 1, limit: int = 2000):
     u_ip = di[ConvenienceBrandStoreUsecase]
 
     count_brand_stores, brand_stores = u_ip.get_brand_stores(page, limit)
@@ -40,7 +36,7 @@ def get_brand_store(r: Request, page: int = 1, limit: int = 500):
 
 
 @api_router.get("/populations", response_model=PaginateGeoJSONResponse)
-def get_population(r: Request, page: int = 1, limit: int = 500):
+def get_population(r: Request, page: int = 1, limit: int = 2000):
     u_ip = di[ConvenienceBrandStoreUsecase]
     
     count_populations, populations = u_ip.get_populations(page, limit)
