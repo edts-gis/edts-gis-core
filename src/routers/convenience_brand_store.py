@@ -16,7 +16,7 @@ api_router = APIRouter(
 
 # Router
 @api_router.get("/brand-stores", response_model=PaginateGeoJSONResponse)
-def get_brand_store(r: Request, page: int = 1, limit: int = 2000):
+def get_brand_store(r: Request, page: int = 1, limit: int = 500):
     u_ip = di[ConvenienceBrandStoreUsecase]
 
     count_brand_stores, brand_stores = u_ip.get_brand_stores(page, limit)
@@ -36,7 +36,7 @@ def get_brand_store(r: Request, page: int = 1, limit: int = 2000):
 
 
 @api_router.get("/populations", response_model=PaginateGeoJSONResponse)
-def get_population(r: Request, page: int = 1, limit: int = 2000):
+def get_population(r: Request, page: int = 1, limit: int = 500):
     u_ip = di[ConvenienceBrandStoreUsecase]
     
     count_populations, populations = u_ip.get_populations(page, limit)

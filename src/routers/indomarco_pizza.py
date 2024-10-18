@@ -16,7 +16,7 @@ api_router = APIRouter(
 
 # Router
 @api_router.get("/geom-kabkota-pizza", response_model=PaginateGeoJSONResponse)
-def get_geom_kabkota_pizza(r: Request, page: int = 1, limit: int = 2000):
+def get_geom_kabkota_pizza(r: Request, page: int = 1, limit: int = 500):
     u_ip = di[IndomarcoPizzaUsecase]
 
     count_geom_kabkota_pizza, geom_kabkota_pizza = u_ip.get_geom_kabkota_pizza(page, limit)
@@ -36,7 +36,7 @@ def get_geom_kabkota_pizza(r: Request, page: int = 1, limit: int = 2000):
 
 
 @api_router.get("/geom-indonesia-kelurahan", response_model=PaginateGeoJSONResponse)
-def get_geom_indonesia_kelurahan(r: Request, page: int = 1, limit: int = 2000):
+def get_geom_indonesia_kelurahan(r: Request, page: int = 1, limit: int = 500):
     u_ip = di[IndomarcoPizzaUsecase]
 
     count_geom_indonesia_kelurahan, geom_indonesia_kelurahan = u_ip.get_geom_indonesia_kelurahan(page, limit)
